@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace keepr.Models
 {
-  public class vaultkeeps
+  public class vault
   {
     public int Id { get; set; }
     [Required]
-    public int VaultId { get; set; }
+    public string Description { get; set; }
     [Required]
     public string UserId { get; set; }
     [Required]
-    public int KeepId { get; set; }
+    public string Name { get; set; }
   }
 }
