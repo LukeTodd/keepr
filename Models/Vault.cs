@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace keepr.Models
 {
-  public class vault
+  public class Vault
   {
     public int Id { get; set; }
     [Required]

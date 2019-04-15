@@ -17,10 +17,10 @@ namespace keepr.Repositories
     {
       return _db.Query<Keep>("SELECT * FROM games");
     }
-    // public IEnumerable<Keep> GetByUserId(string UserId)
-    // {
-    //   return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE userid = @UserId", new { UserId });
-    // }
+    public IEnumerable<Keep> GetByUserId(string UserId)
+    {
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userid = @UserId", new { UserId });
+    }
     public Keep GetById(int Id)
     {
       return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @Id", new { Id });
