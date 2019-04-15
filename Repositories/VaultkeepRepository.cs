@@ -31,6 +31,8 @@ namespace keepr.Repositories
         VAULES(@VaultId, @KeepId, @UserId);
         SELECT LAST_INSERT_ID();
         ", vaultkeeps);
+        vaultkeeps.Id = id;
+        return vaultkeeps;
       }
       catch (Exception e)
       {
