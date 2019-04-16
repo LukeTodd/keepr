@@ -28,10 +28,36 @@ namespace keepr.Controllers
     }
 
     //GET ALL BY USER ID
-    [HttpGet("{userid}/keepers")]
-    public ActionResult<IEnumerable<User>> GetByUserId(string userid);
+    // [HttpGet("{userid}/keepers")]
+    // public ActionResult<IEnumerable<User>> GetByUserId(string userid)
+    // {
+    //   return Ok(_kr.GetByUserId(userid));
+    // }
+
+
+    //GET KEEP BY ID
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<Keep>> GetById(int id)
     {
-      return Ok(_kr.GetKeepsByUserId(userid));
+      return Ok(_kr.GetById(id));
+    }
+
+    //CREATE KEEP
+    [HttpPost]
+    public ActionResult<Keep> Create([FromBody] Keep keepr)
+    {
+      Keep newKeepr = _kr.CreateKeep(keepr);
+      if (newKeepr == null) { return BadRequest(); }
+      return Ok(newKeepr);
+    }
+
+    //DELETE KEEP
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      bool successful = _kr.Delete(id);
+      if (!successful) { return BadRequest(); }
+      return Ok();
+    }
   }
-}
 }

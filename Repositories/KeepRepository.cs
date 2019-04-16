@@ -15,7 +15,7 @@ namespace keepr.Repositories
     }
     public IEnumerable<Keep> GetALL()
     {
-      return _db.Query<Keep>("SELECT * FROM games");
+      return _db.Query<Keep>("SELECT * FROM keeps");
     }
     public IEnumerable<Keep> GetByUserId(string UserId)
     {
