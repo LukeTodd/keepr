@@ -27,12 +27,12 @@ namespace keepr.Controllers
       return Ok(results);
     }
 
-    //GET ALL BY USER ID
-    // [HttpGet("{userid}/keepers")]
-    // public ActionResult<IEnumerable<User>> GetByUserId(string userid)
-    // {
-    //   return Ok(_kr.GetByUserId(userid));
-    // }
+    // GET ALL BY USER ID
+    [HttpGet("{userid}")]
+    public ActionResult<IEnumerable<Keep>> GetByUserId(string userId)
+    {
+      return Ok(_kr.GetByUserId(userId));
+    }
 
 
     //GET KEEP BY ID

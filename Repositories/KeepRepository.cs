@@ -17,9 +17,9 @@ namespace keepr.Repositories
     {
       return _db.Query<Keep>("SELECT * FROM keeps");
     }
-    public IEnumerable<Keep> GetByUserId(string UserId)
+    public IEnumerable<Keep> GetByUserId(string userId)
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE userid = @UserId", new { UserId });
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @UserId", new { userId });
     }
     public Keep GetById(int Id)
     {
@@ -30,8 +30,8 @@ namespace keepr.Repositories
       try
       {
         int id = _db.ExecuteScalar<int>(@"
-        INSERT INTO keeps (name, description, img, isprivate, views, shares, keeps, userid)
-        VALUEs(@Name, @Description, @Img, @IsPrivate, @Views, @Shares, @Keeps, @UserId);
+        INSERT INTO keeps (name, description, img, isprivate, views, shares, keeps, userId)
+        VALUES (@Name, @Description, @Img, @IsPrivate, @Views, @Shares, @Keeps, @UserId);
         SELECT LAST_INSERT_ID();
         ", keep);
         keep.Id = id;
