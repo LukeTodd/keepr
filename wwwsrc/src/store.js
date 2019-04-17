@@ -22,7 +22,8 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
-    keeps: []
+    keeps: [],
+    vaults: []
   },
   mutations: {
     setUser(state, user) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     setKeeps(state, data) {
       state.keeps = data
+    },
+    setVaults(state, data) {
+      state.vaults = data
     }
   },
   actions: {
@@ -79,9 +83,17 @@ export default new Vuex.Store({
         })
     },
     getKeepsByUser({ commit, dispatch }, payload) {
-      api.get("user")
+      api.get("keeps/user")
         .then(res => {
           commit('setKeeps', res.data)
+        })
+    },
+    //#endregion
+    //#region -- Vaults
+    getVaultsByUser({ commit, dispatch }, payload) {
+      api.get("vault/user")
+        .then(res => {
+          commit('setVaults', res.data)
         })
     }
     //#endregion

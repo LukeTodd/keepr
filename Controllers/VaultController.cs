@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
@@ -18,10 +19,12 @@ namespace keepr.Controllers
     }
 
     //GETVAULTSBYUSERID
-    [HttpGet("{id}")]
-    public ActionResult<IEnumerable<Vault>> GetAllByUserId(string id)
+    [Authorize]
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Vault>> GetAllByUserId()
     {
-      return Ok(_vr.GetAllByUserId(id));
+      string userId = HttpContext.User.Identity.Name;
+      return Ok(_vr.GetAllByUserId(userId));
     }
 
     //CREATEVAULT

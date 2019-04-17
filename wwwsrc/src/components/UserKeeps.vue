@@ -11,7 +11,7 @@
 <script>
 
   export default {
-    name: 'PublicKeeps',
+    name: 'UserKeeps',
     props: ['UserKeepData'],
 
     mounted() {
