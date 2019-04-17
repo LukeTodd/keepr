@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
@@ -28,9 +29,11 @@ namespace keepr.Controllers
     }
 
     // GET ALL BY USER ID
-    [HttpGet("{userid}")]
-    public ActionResult<IEnumerable<Keep>> GetByUserId(string userId)
+    [Authorize]
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Keep>> GetByUserId()
     {
+      string userId = HttpContext.User.Identity.Name;
       return Ok(_kr.GetByUserId(userId));
     }
 

@@ -77,6 +77,12 @@ export default new Vuex.Store({
         .then(res => {
           commit('setKeeps', res.data)
         })
+    },
+    getKeepsByUser({ commit, dispatch }, payload) {
+      api.get("user")
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
     }
     //#endregion
   }

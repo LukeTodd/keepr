@@ -10,11 +10,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" @click="$router.push({name: 'myKeeps'})" href="#">My Keeps<span
+            <a class="nav-link" @click="$router.push({name: 'home'})" href="#">All Keeps<span
                 class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" @click="$router.push({name: 'myVaults'})" href="#">My Vaults</a>
+            <a class="nav-link" href="#">My Vaults</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" @click="logout" href="#">Logout</a>
@@ -30,63 +30,25 @@
 </template>
 
 <script>
-  export default {
-    name: "login",
-    mounted() {
-      //checks for valid session
-      this.$store.dispatch("authenticate");
 
-    },
-    data() {
-      return {
-        loginForm: true,
-        creds: {
-          email: "",
-          password: ""
-        },
-        newUser: {
-          email: "",
-          password: "",
-          username: ""
-        }
-      };
+  export default {
+    name: "myKeepsNav",
+    mounted() {
+
     },
     computed: {
 
     },
     methods: {
-      register() {
-        this.$store.dispatch("register", this.newUser);
-      },
-      loginUser() {
-        this.$store.dispatch("login", this.creds);
-      },
       logout() {
         this.$store.dispatch('logout')
       }
+    },
+    components: {
+
     }
   }
 </script>
 
-
-
 <style>
-  .bg-nav {
-    background-color: rgb(111, 38, 61);
-  }
-
-  .bg-blue {
-    background-color: #007bff;
-  }
-
-  .blue {
-    color: #007bff;
-    text-shadow: black 1px 1px;
-
-  }
-
-  .no-padding {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
 </style>
