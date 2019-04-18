@@ -2,25 +2,61 @@
 using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
 {
-  [Route("api[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public class VaultKeepController : ControllerBase
   {
-    private readonly VaultKeepRepository _vr;
-    public VaultKeepController(VaultKeepRepository vr)
+    private readonly VaultKeepRepository _vkr;
+    public VaultKeepController(VaultKeepRepository vkr)
     {
-      _vr = vr;
+      _vkr = vkr;
     }
 
     //GET ALL VAULT KEEPS BY VAULT ID
-    [HttpGet("{id}")]
-    public ActionResult<IEnumerable<VaultKeeps>> GetAllByVaultId(int id)
+    [Authorize]
+    [HttpGet("{vaultId}")]
+    public ActionResult<IEnumerable<VaultKeeps>> GetAllByVaultId(int vaultId)
     {
-      return Ok(_vr.GetAllByVaultId(id));
+      string userId = HttpContext.User.Identity.Name;
+      IEnumerable<Keep> results = _vkr.GetAllByVaultId(vaultId, userId);
+      if (results == null)
+      {
+        return BadRequest();
+      }
+      return Ok(results);
+    }
+
+    //CREATE VAULTKEEP
+    [Authorize]
+    [HttpPost]
+    public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps vaultKeep)
+    {
+      vaultKeep.UserId = HttpContext.User.Identity.Name;
+      VaultKeeps newVaultKeep = _vkr.CreateVaultKeeps(vaultKeep);
+
+      if (newVaultKeep == null)
+      {
+        return BadRequest();
+      }
+      return Ok(newVaultKeep);
+
+    }
+
+    //Delete VaultKeep
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      bool successful = _vkr.Delete(id);
+      if (!successful)
+      {
+        return BadRequest();
+      }
+      return Ok();
     }
   }
 }

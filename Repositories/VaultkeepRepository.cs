@@ -14,25 +14,28 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<VaultKeeps> GetAllByVaultId(int id)
+    public IEnumerable<Keep> GetAllByVaultId(int vaultId, string userId)
     {
-      return _db.Query<VaultKeeps>("SELECT * FROM vaultkeeps WHERE id = @VaultId", new { id });
+      return _db.Query<Keep>(@"SELECT * FROM vaultkeeps vk
+INNER JOIN keeps k ON k.id = vk.keepId 
+WHERE (vaultId = @vaultId AND vk.userId = @userId) 
+", new { vaultId, userId });
     }
     public VaultKeeps GetById(int Id)
     {
       return _db.QueryFirstOrDefault<VaultKeeps>("SELECT * FROM vaultkeeps WHERE id = @Id", new { Id });
     }
-    public VaultKeeps CreateVaultKeeps(VaultKeeps vaultkeeps)
+    public VaultKeeps CreateVaultKeeps(VaultKeeps vaultKeep)
     {
       try
       {
         int id = _db.ExecuteScalar<int>(@"
-        INSERT INTO vaultkeeps (vaultid, keepid, userid)
-        VAULES(@VaultId, @KeepId, @UserId);
+        INSERT INTO vaultkeeps (vaultId, keepId, userId)
+        VALUES (@VaultId, @KeepId, @UserId);
         SELECT LAST_INSERT_ID();
-        ", vaultkeeps);
-        vaultkeeps.Id = id;
-        return vaultkeeps;
+        ", vaultKeep);
+        vaultKeep.Id = id;
+        return vaultKeep;
       }
       catch (Exception e)
       {
@@ -42,7 +45,7 @@ namespace keepr.Repositories
     }
     public bool Delete(int Id)
     {
-      int success = _db.Execute("DELETE FROM games WHERE id = @Id", new { Id });
+      int success = _db.Execute("DELETE FROM vaultkeeps WHERE id = @Id", new { Id });
       return success > 0;
     }
   }
