@@ -8,6 +8,9 @@ import Login from './views/Login.vue'
 import MyKeeps from './views/MyKeeps.vue'
 // @ts-ignore
 import MyVaults from './views/MyVaults.vue'
+// @ts-ignore
+import ActiveVault from './views/ActiveVault'
+
 
 Vue.use(Router)
 
@@ -32,6 +35,11 @@ export default new Router({
       path: '/myvaults',
       name: 'myVaults',
       component: MyVaults
+    },
+    {
+      path: '/myvault/:id',
+      name: 'activeVault',
+      component: ActiveVault
     }
   ]
 })

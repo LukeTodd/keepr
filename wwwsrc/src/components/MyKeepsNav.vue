@@ -14,7 +14,7 @@
                 class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Create Keeps</a>
+            <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">Create Keeps</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" @click="$router.push({name: 'myVaults'})" href="#">My Vaults</a>
@@ -29,6 +29,35 @@
         </form>
       </div>
     </nav>
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create A Keep</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="row" @submit.prevent='createKeep()'>
+              <div class="col-12">
+                <input class="formfield" type="text" v-model="newKeep.name" name="Name" placeholder="Title:" required>
+                <br>
+                <input class="formfield" type="text" v-model="newKeep.img" name="Img" placeholder="Add Image Url:">
+                <br>
+                <input class="formfield" type="text" v-model="newKeep.description" name="Description"
+                  placeholder="Description:">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,12 +68,22 @@
     mounted() {
 
     },
+    data() {
+      return {
+        newKeep: {
+        }
+      }
+    },
     computed: {
 
     },
     methods: {
       logout() {
         this.$store.dispatch('logout')
+      },
+      createKeep() {
+        debugger
+        this.$store.dispatch('createKeep', this.newKeep)
       }
     },
     components: {

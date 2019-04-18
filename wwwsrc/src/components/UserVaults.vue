@@ -1,8 +1,17 @@
 <template>
   <div class="vault-margin">
+    <div class="card">
+      <div class="card-header">
+        {{userVaultData.name}}
+      </div>
+      <div class="card-body">
 
-    {{userVaultData.name}}
-    {{userVaultData.description}}
+        <p class="card-text">{{userVaultData.description}}</p>
+        <button @click="deleteVault(userVaultData)" class="btn btn-primary">Delete Vault</button>
+        <button href="#" class="btn btn-primary">View Vault</button>
+      </div>
+    </div>
+
 
 
 
@@ -22,7 +31,9 @@
 
     },
     methods: {
-
+      deleteVault(UserVaultData) {
+        return this.$store.dispatch('deleteVault', UserVaultData.id)
+      }
     },
     components: {
 

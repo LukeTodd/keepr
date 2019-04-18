@@ -3,6 +3,9 @@
     <div class="col-12">
       <my-vaults-nav></my-vaults-nav>
     </div>
+    <div class="col-12 vault-title">
+      My Vaults
+    </div>
     <div class="col-12">
       <user-vaults v-for="userVault in userVaults" :userVaultData="userVault"></user-vaults>
     </div>
@@ -33,4 +36,7 @@
 </script>
 
 <style>
+  .vault-title {
+    margin-top: 150px;
+  }
 </style>

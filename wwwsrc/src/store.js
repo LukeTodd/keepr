@@ -23,7 +23,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     keeps: [],
-    vaults: []
+    vaults: [],
+    vaultkeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -34,6 +35,12 @@ export default new Vuex.Store({
     },
     setVaults(state, data) {
       state.vaults = data
+    },
+    addKeep(state, payload) {
+      state.keeps.push(payload)
+    },
+    addVault(state, payload) {
+      state.vaults.push(payload)
     }
   },
   actions: {
@@ -88,12 +95,36 @@ export default new Vuex.Store({
           commit('setKeeps', res.data)
         })
     },
+    createKeep({ commit, dispatch }, payload) {
+      api.post('keeps', payload)
+        .then(res => {
+          commit('addKeep', res.data)
+        })
+    },
+    deleteKeep({ commit, dispatch }, payload) {
+      api.delete('keeps/' + payload)
+        .then(res => {
+          dispatch('getKeepsByUser', res.data)
+        })
+    },
     //#endregion
     //#region -- Vaults
     getVaultsByUser({ commit, dispatch }, payload) {
       api.get("vault/user")
         .then(res => {
           commit('setVaults', res.data)
+        })
+    },
+    createVault({ commit, dispatch }, payload) {
+      api.post('vault', payload)
+        .then(res => {
+          commit('addVault', res.data)
+        })
+    },
+    deleteVault({ commit, dispatch }, payload) {
+      api.delete('vault/' + payload)
+        .then(res => {
+          dispatch('getVaultsByUser', res.data)
         })
     }
     //#endregion

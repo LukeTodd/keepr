@@ -1,13 +1,21 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <my-keeps-nav></my-keeps-nav>
-    </div>
-    <div class="col-12">
-      <h1 class="mykeepstitle"> MY KEEPS</h1>
-    </div>
-    <div class="col-12">
-      <user-keeps v-for="userKeep in userKeeps" :UserKeepData="userKeep"></user-keeps>
+      <div class="row">
+        <div class="col-12">
+          <my-keeps-nav></my-keeps-nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h1 class="mykeepstitle"> MY KEEPS</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 d-flex">
+          <user-keeps v-for="userKeep in userKeeps" :UserKeepData="userKeep"></user-keeps>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,12 +28,7 @@
     mounted() {
       return this.$store.dispatch('getKeepsByUser')
     },
-    data() {
-      return {
-        newKeep: {
-        }
-      }
-    },
+
     computed: {
       userKeeps() {
         return this.$store.state.keeps
