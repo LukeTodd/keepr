@@ -8,7 +8,7 @@
 
         <p class="card-text">{{userVaultData.description}}</p>
         <button @click="deleteVault(userVaultData)" class="btn btn-primary">Delete Vault</button>
-        <button href="#" class="btn btn-primary">View Vault</button>
+        <button @click="$router.push({name: activeVault})" class="btn btn-primary">View Vault</button>
       </div>
     </div>
 

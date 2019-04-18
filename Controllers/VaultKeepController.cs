@@ -17,7 +17,7 @@ namespace keepr.Controllers
     }
 
     //GET ALL VAULT KEEPS BY VAULT ID
-    [HttpGet("{id}/keeps")]
+    [HttpGet("{id}")]
     public ActionResult<IEnumerable<VaultKeeps>> GetAllByVaultId(int id)
     {
       return Ok(_vr.GetAllByVaultId(id));

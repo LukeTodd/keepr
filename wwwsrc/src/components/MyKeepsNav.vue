@@ -51,7 +51,7 @@
                   placeholder="Description:">
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+                <button type="submit" class="btn btn-secondary">Submit</button>
               </div>
             </form>
           </div>
@@ -71,6 +71,10 @@
     data() {
       return {
         newKeep: {
+          name: "",
+          img: "",
+          description: "",
+          userId: ""
         }
       }
     },
@@ -82,8 +86,17 @@
         this.$store.dispatch('logout')
       },
       createKeep() {
-        debugger
-        this.$store.dispatch('createKeep', this.newKeep)
+        let name = this.newKeep.name
+        let img = this.newKeep.img
+        let description = this.newKeep.description
+        let userId = this.$store.state.user.userId
+        let payload = {
+          name,
+          img,
+          description,
+          userId
+        }
+        this.$store.dispatch('createKeep', payload)
       }
     },
     components: {
