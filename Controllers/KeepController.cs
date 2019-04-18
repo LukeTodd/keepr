@@ -31,10 +31,15 @@ namespace keepr.Controllers
     // GET ALL BY USER ID
     [Authorize]
     [HttpGet("user")]
-    public ActionResult<IEnumerable<Keep>> GetByUserId()
+    public ActionResult<Keep> GetByUserId()
     {
       string userId = HttpContext.User.Identity.Name;
-      return Ok(_kr.GetByUserId(userId));
+      IEnumerable<Keep> results = _kr.GetById(userId);
+      if (results == null)
+      {
+        return BadRequest(" You Have a bad Request");
+      }
+      return Ok(results);
     }
 
 

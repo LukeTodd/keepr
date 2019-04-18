@@ -86,10 +86,11 @@
         this.$store.dispatch('logout')
       },
       createKeep() {
+
         let name = this.newKeep.name
         let img = this.newKeep.img
         let description = this.newKeep.description
-        let userId = this.$store.state.user.userId
+        let userId = this.$store.state.user.id
         let payload = {
           name,
           img,

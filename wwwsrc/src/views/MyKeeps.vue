@@ -26,7 +26,7 @@
   export default {
     name: "myKeeps",
     mounted() {
-      return this.$store.dispatch('getKeepsByUser')
+      this.getKeepsByUser()
     },
 
     computed: {
@@ -35,7 +35,11 @@
       }
     },
     methods: {
+      getKeepsByUser() {
 
+        let userId = this.$store.state.user.id
+        this.$store.dispatch('getKeepsByUser')
+      }
     },
     components: {
       MyKeepsNav,
