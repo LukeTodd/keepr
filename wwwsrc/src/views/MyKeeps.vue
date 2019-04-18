@@ -4,6 +4,9 @@
       <my-keeps-nav></my-keeps-nav>
     </div>
     <div class="col-12">
+      <h1 class="mykeepstitle"> MY KEEPS</h1>
+    </div>
+    <div class="col-12">
       <user-keeps v-for="userKeep in userKeeps" :UserKeepData="userKeep"></user-keeps>
     </div>
   </div>
@@ -16,6 +19,12 @@
     name: "myKeeps",
     mounted() {
       return this.$store.dispatch('getKeepsByUser')
+    },
+    data() {
+      return {
+        newKeep: {
+        }
+      }
     },
     computed: {
       userKeeps() {
@@ -33,4 +42,7 @@
 </script>
 
 <style>
+  .mykeepstitle {
+    margin-top: 150px;
+  }
 </style>

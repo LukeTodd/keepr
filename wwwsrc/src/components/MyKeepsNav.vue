@@ -14,7 +14,10 @@
                 class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Vaults</a>
+            <a class="nav-link" href="#">Create Keeps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" @click="$router.push({name: 'myVaults'})" href="#">My Vaults</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" @click="logout" href="#">Logout</a>
