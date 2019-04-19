@@ -13,16 +13,13 @@
             Add To Vault
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <drop-down v-for="vault in vaults" :vaultData='vault'></drop-down>
+            <!-- <drop-down v-for="vault in vaults" :vaultData='vault'></drop-down> -->
+            <a class="dropdown-item" v-for="vault in vaults"
+              @click="createVaultKeep(vault, UserKeepData)">{{vault.name}}</a>
           </div>
         </div>
       </div>
     </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -44,6 +41,17 @@
     methods: {
       deleteKeep(UserKeepData) {
         return this.$store.dispatch('deleteKeep', UserKeepData.id)
+      },
+      createVaultKeep(vault, UserKeepData) {
+        let vaultId = vault.id
+        let keepId = UserKeepData.id
+        let userId = this.$store.state.user.id
+        let payload = {
+          vaultId,
+          keepId,
+          userId
+        }
+        this.$store.dispatch("createVaultKeep", payload)
       }
     },
     components: {

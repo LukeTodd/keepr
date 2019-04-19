@@ -3,7 +3,12 @@
     <div class="col-12">
       <div class="row">
         <div class="col-12">
-
+          <vault-keep-nav></vault-keep-nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 vk-margin">
+          <h3></h3>
           <vault-keeps v-for="vaultKeep in vaultKeeps" :VaultKeepData="vaultKeep"></vault-keeps>
         </div>
       </div>
@@ -14,6 +19,7 @@
 </template>
 
 <script>
+  import VaultKeepNav from "@/components/VaultKeepNav.vue"
   import VaultKeeps from "@/components/VaultKeeps.vue"
   export default {
     name: "ActiveVault",
@@ -31,7 +37,8 @@
 
     },
     components: {
-      VaultKeeps
+      VaultKeeps,
+      VaultKeepNav
     }
   }
 
@@ -40,4 +47,7 @@
 
 
 <style>
+  .vk-margin {
+    margin-top: 150px;
+  }
 </style>

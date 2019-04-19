@@ -13,6 +13,12 @@
 
     mounted() {
 
+    },
+    computed: {
+
+    },
+    methods: {
+
     }
   }
 </script>

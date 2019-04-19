@@ -44,6 +44,9 @@ export default new Vuex.Store({
     },
     setVaultKeep(state, payload) {
       state.vaultKeeps = payload
+    },
+    addVaultKeep(state, payload) {
+      state.vaultKeeps = payload
     }
   },
   actions: {
@@ -144,7 +147,14 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getVaultKeeps', res.data)
         })
+    },
+    createVaultKeep({ commit, dispatch }, payload) {
+      api.post('vaultkeep', payload)
+        .then(res => {
+          commit('addVaultKeep', res.data)
+        })
     }
+
     //#endregion
   }
 })

@@ -1,9 +1,13 @@
 <template>
-  <div>
-    {{keepData.name}}
-    <img v-bind:src="keepData.img">
-    {{keepData.description}}
-
+  <div class=" d-flex pkmargin">
+    <div class="card">
+      <h5 class="card-title">{{keepData.name}}</h5>
+      <img v-bind:src="keepData.img">
+      <div class="card-body">
+        <p class="card-text">{{keepData.description}}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,5 +33,7 @@
 </script>
 
 <style>
-
+  .pkmargin {
+    margin-top: 150px;
+  }
 </style>
