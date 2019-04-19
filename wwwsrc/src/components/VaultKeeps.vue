@@ -6,7 +6,7 @@
       <div class="card-body">
         <p class="card-text">{{VaultKeepData.description}}
         </p>
-        <button @click="deleteKeep(VaultKeepData)" class="btn btn-primary">Delete From Vault</button>
+        <button @click="deleteKeep()" class="btn btn-primary">Delete From Vault</button>
 
       </div>
     </div>
@@ -26,12 +26,20 @@
     computed: {
       vaultKeeps() {
         return this.$store.state.vaultKeeps
+      },
+      vaults() {
+        return this.$store.state.vaults
       }
     },
     methods: {
-      deleteKeep(VaultKeepData) {
-        debugger
-        return this.$store.dispatch('deleteVaultKeeps', VaultKeepData.id)
+      deleteKeep() {
+        let keepId = this.VaultKeepData.id
+        let vaultId = +this.$route.params.id
+        let payload = {
+          keepId,
+          vaultId
+        }
+        return this.$store.dispatch('deleteVaultKeeps', payload)
       }
     },
     components: {

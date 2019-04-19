@@ -48,10 +48,10 @@ namespace keepr.Controllers
     }
 
     //Delete VaultKeep
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    [HttpDelete("{vaultId}/keep/{keepId}")]
+    public ActionResult<string> Delete(int vaultId, int keepId)
     {
-      bool successful = _vkr.Delete(id);
+      bool successful = _vkr.Delete(vaultId, keepId);
       if (!successful)
       {
         return BadRequest();
